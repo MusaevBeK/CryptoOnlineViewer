@@ -8,9 +8,8 @@
 import UIKit
 import Kingfisher
 
+
 class CryptosViewController: UIViewController {
-    
-    let trtr = InfoPageController()
     
     let network = ApiResponse()
         
@@ -36,7 +35,6 @@ class CryptosViewController: UIViewController {
     func getResponse() {
         network.response(urlString: network.requests.urlString) { (model) in
             self.model = model
-            print(model)
             self.cryptostableView.reloadData()
         }
     }
@@ -64,31 +62,30 @@ extension CryptosViewController: UITableViewDataSource, UITableViewDelegate {
         cell.cryptosName.text = crypto?.name
         cell.cryptosInfo.text = crypto?.symbol
         cell.cryptosPrice.text = crypto?.price
-       
+
+        // MARK: - Kingfisher
         if let url = URL(string: crypto?.logo_url ?? "") {
             cell.imageCryptos.kf.setImage(with: url)
         }
-
+    
         return cell
     }
     
   // MARK: - вызов функции didSelectRowAt
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let vc = storyboard?.instantiateViewController(withIdentifier: "InfoPageController") as? InfoPageController
-        vc?.nameCr = model[indexPath.row]?.name ?? ""
-        vc?.infoCr = model[indexPath.row]?.symbol ?? ""
-        vc?.priceCr = model[indexPath.row]?.price ?? ""
+        let transferSelectedData = storyboard?.instantiateViewController(withIdentifier: "InfoPageController") as? InfoPageController
+        transferSelectedData?.transferName = model[indexPath.row]?.name ?? ""
+        transferSelectedData?.transferInfo = model[indexPath.row]?.symbol ?? ""
+        transferSelectedData?.transferPrice = model[indexPath.row]?.price ?? ""
         
         if let url = URL(string: model[indexPath.row]?.logo_url ?? "") {
 
-            vc?.lofoCr.kf.setImage(with: url)
+            transferSelectedData?.transferCryptoImage.kf.setImage(with: url)
         }
-        self.present(vc!, animated: true, completion: nil)
+        self.present(transferSelectedData!, animated: true, completion: nil)
         
     }
-  
 }
 
 

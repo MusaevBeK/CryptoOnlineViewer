@@ -12,13 +12,14 @@ class InfoPageController: UIViewController {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var info: UILabel!
     @IBOutlet weak var price: UILabel!
-    @IBOutlet weak var lofo: UIImageView!
-    
+    @IBOutlet weak var cryptoImage: UIImageView!
+
     @IBOutlet weak var backButtonPropertys: UIButton!
-    var nameCr: String? = nil
-    var infoCr = ""
-    var priceCr = ""
-    var lofoCr = UIImageView()
+    
+    var transferName: String? = nil
+    var transferInfo = ""
+    var transferPrice = ""
+    var transferCryptoImage = UIImageView()
 
 
     @IBAction func backButton(_ sender: Any) {
@@ -28,10 +29,10 @@ class InfoPageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        name.text = nameCr
-        info.text = infoCr
-        price.text = priceCr
-        lofo.image = lofoCr.image
+        name.text = transferName
+        info.text = transferInfo
+        price.text = transferPrice
+        cryptoImage.image = transferCryptoImage.image
         
         backButtonPropertys.layer.cornerRadius = 15
 
